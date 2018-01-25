@@ -9,13 +9,24 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, StorageDelegate {
 
     var window: UIWindow?
 
+    //store
+    struct StoreConstants{
+        static let STORE_KEY_DAILY_WORD = "STORE_KEY_DAILY_WORD"
+        static let STORE_KEY_WORD_DEFAULT = "每日一字"
+        static let STORE_KEY_WEEK_WEATHER = "STORE_KEY_WEEK_WEATHER"
+    }
+    let storeUserDefaults = UserDefaults.standard
 
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        initLoader()
+        
         return true
     }
 
@@ -41,6 +52,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    
+    // init loader
+    func initLoader() {
+        //WordLoader.getInstance().setStorageInterface(this)
+        //WeatherLoader.getInstance().setStorageInterface(this)
+    }
+    
+    
+    // StorageDelegate functions
+    func refreshWord(word: String?) {
+        if word != nil {
+            storeUserDefaults.set(word, forKey: StoreConstants.STORE_KEY_DAILY_WORD)
+            storeUserDefaults.synchronize()
+        }
+    }
+    
+    func getWord() -> String? {
+        let word: String? = storeUserDefaults.string(forKey: StoreConstants.STORE_KEY_DAILY_WORD)
+        
+        if word != nil {
+            return word
+        }
+            
+        return StoreConstants.STORE_KEY_WORD_DEFAULT
+    }
+    
+    func refreshWeather(weathers: [String]?) {
+        if weathers != nil {
+            storeUserDefaults.set(weathers, forKey: StoreConstants.STORE_KEY_WEEK_WEATHER)
+            storeUserDefaults.synchronize()
+        }
+    }
+    
+    func getWeather() -> [String]? {
+        return storeUserDefaults.object(forKey: StoreConstants.STORE_KEY_WEEK_WEATHER) as? [String]
+    }
+    
 }
 
