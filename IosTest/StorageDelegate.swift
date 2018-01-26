@@ -10,10 +10,10 @@ import Foundation
 
 protocol StorageDelegate {
     
-    mutating func refreshWord(word: String?)
-    mutating func getWord() -> String?
+    func refreshWord(word: String?, wordLoaderDelegate: WordLoaderDelegate?)
+    func getWord() -> String?
     
-    mutating func refreshWeather(weathers: [String]?)
-    mutating func getWeather() -> [String]?
+    func refreshWeather(weathers: [String]?, weatherLoaderDelegate: WeatherLoaderDelegate?)
+    func getWeather() -> [String]?
     
 }

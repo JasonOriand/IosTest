@@ -55,16 +55,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, StorageDelegate {
     
     // init loader
     func initLoader() {
-        //WordLoader.getInstance().setStorageInterface(this)
-        //WeatherLoader.getInstance().setStorageInterface(this)
+        WordLoader.sharedInstance.setStorageDelegate(storageDelegate: self)
+        WeatherLoader.sharedInstance.setStorageDelegate(storageDelegate: self)
     }
     
     
     // StorageDelegate functions
-    func refreshWord(word: String?) {
+    func refreshWord(word: String?, wordLoaderDelegate: WordLoaderDelegate?) {
         if word != nil {
             storeUserDefaults.set(word, forKey: StoreConstants.STORE_KEY_DAILY_WORD)
             storeUserDefaults.synchronize()
+            
+            wordLoaderDelegate?.refreshWordView()
         }
     }
     
@@ -78,10 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, StorageDelegate {
         return StoreConstants.STORE_KEY_WORD_DEFAULT
     }
     
-    func refreshWeather(weathers: [String]?) {
+    func refreshWeather(weathers: [String]?, weatherLoaderDelegate: WeatherLoaderDelegate?) {
         if weathers != nil {
             storeUserDefaults.set(weathers, forKey: StoreConstants.STORE_KEY_WEEK_WEATHER)
             storeUserDefaults.synchronize()
+            
+            weatherLoaderDelegate?.refreshWeatherView()
         }
     }
     
