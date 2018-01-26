@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Kanna.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-IosTest.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -12,7 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>075CE963DF55C50B12FA18E4E3404D92</key>
+		<key>4D10E4FF5A483B852B47CCA0B994E340</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95321F0B2DD9012E439EAF50346C1F8D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

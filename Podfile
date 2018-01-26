@@ -6,6 +6,6 @@ target 'IosTest' do
   use_frameworks!
 
   # Pods for IosTest
-  
+  pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'feature/v3.0.0'
 
 end
