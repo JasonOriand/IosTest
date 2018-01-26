@@ -97,6 +97,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         
         if let weatherLabel = cell.textLabel {
+            weatherLabel.numberOfLines = 0
+            weatherLabel.font = UIFont(name: weatherLabel.font.fontName, size: 12)
             weatherLabel.text = "\(weathers[indexPath.row])"
         }
             
