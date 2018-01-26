@@ -21,6 +21,19 @@ class WordLoader {
     
     func getDailyWord(wordLoaderDelegate: WordLoaderDelegate) {
         storageDelegate?.refreshWord(word: "test", wordLoaderDelegate: wordLoaderDelegate)
+        
+        let myURLString = "http://www.appledaily.com.tw/index/dailyquote/"
+        guard let myURL = URL(string: myURLString) else {
+            print("Error: \(myURLString) doesn't seem to be a valid URL")
+            return
+        }
+        
+        do {
+            let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
+            print("HTML : \(myHTMLString)")
+        } catch let error {
+            print("Error: \(error)")
+        }
     }
     
 }
