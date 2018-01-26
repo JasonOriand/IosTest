@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Kanna
+import Alamofire
 
 class WordLoader {
     
@@ -20,19 +22,25 @@ class WordLoader {
     }
     
     func getDailyWord(wordLoaderDelegate: WordLoaderDelegate) {
-        storageDelegate?.refreshWord(word: "test", wordLoaderDelegate: wordLoaderDelegate)
-        
-        let myURLString = "http://www.appledaily.com.tw/index/dailyquote/"
-        guard let myURL = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL")
-            return
-        }
-        
-        do {
-            let myHTMLString = try String(contentsOf: myURL, encoding: .ascii)
-            print("HTML : \(myHTMLString)")
-        } catch let error {
-            print("Error: \(error)")
+        Alamofire.request("http://www.appledaily.com.tw/index/dailyquote/").responseString {
+            response in
+            
+            var dailyWord: String?
+            
+            do {
+                if let html = response.result.value {
+                    let doc = try Kanna.HTML(html: html, encoding: String.Encoding.utf8)
+                    
+                    let content = doc.css("article[class=dphs]")[0]
+                    
+                    dailyWord = content.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                }
+            }
+            catch {
+                print("error...")
+            }
+            
+            self.storageDelegate?.refreshWord(word: dailyWord, wordLoaderDelegate: wordLoaderDelegate);
         }
     }
     

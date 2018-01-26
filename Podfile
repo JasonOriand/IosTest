@@ -8,4 +8,6 @@ target 'IosTest' do
   # Pods for IosTest
   pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'feature/v3.0.0'
 
+  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'master'
+
 end
