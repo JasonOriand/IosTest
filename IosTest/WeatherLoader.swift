@@ -40,6 +40,8 @@ class WeatherLoader {
                             for i in stride(from: 0, to: tempWeathers.count-1, by: 2) {
                                 weathers.append("\(tempWeathers[i].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))\n\(tempWeathers[i+1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))")
                             }
+                            
+                            break
                         }
                     }
                 }
